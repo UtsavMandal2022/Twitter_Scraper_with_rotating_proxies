@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 # Configuration
-PROXYMESH_API_URL = 'http://utsav_og:utsav_og@torn@us-west.proxy.proxymesh.com:31280'
+PROXYMESH_API_URL = ''
 TWITTER_URL = 'https://twitter.com/'
 
 def get_new_proxy():

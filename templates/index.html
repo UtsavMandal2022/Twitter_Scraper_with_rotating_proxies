@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Trending Topics</title>
+    <script>
+        async function fetchTrendingTopics() {
+            const response = await fetch('/fetch_topics');
+            const topics = await response.json();
+            const topicsList = document.getElementById('topicsList');
+            topicsList.innerHTML = '';
+            topics.forEach((topic, index) => {
+                const li = document.createElement('li');
+                li.textContent = `Item ${index + 1}: ${topic}`;
+                topicsList.appendChild(li);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Twitter Trending Topics</h1>
+    <button onclick="fetchTrendingTopics()">Fetch Trending Topics</button>
+    <ul id="topicsList"></ul>
+</body>
+</html>

@@ -24,7 +24,6 @@ def main():
     proxy=random_proxy()
     print(proxy)
     print(chrome_options.arguments)
-    # proxy='202.168.84.40:8080'
     proxy='us-ca.proxymesh.com:31280'
     chrome_options.add_argument(f'--proxy-server={proxy}')
     url='https://x.com/home'
