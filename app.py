@@ -4,8 +4,16 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from pymongo import MongoClient
+from datetime import datetime
+import uuid
 
 app = Flask(__name__)
+
+# MongoDB connection details
+client = MongoClient('mongodb://localhost:27017/')
+db = client['twitter_trends']
+collection = db['trending_topics']
 
 # Replace these with your actual Twitter login credentials
 USERNAME = 'your_twitter_username'
@@ -43,6 +51,14 @@ def fetch_trending_topics():
 
         for item in top_items:
             topics.append(item.text)
+
+        # Save to MongoDB with a unique ID and timestamp
+        document = {
+            'id': str(uuid.uuid4()),
+            'timestamp': datetime.now(),
+            'topics': topics
+        }
+        collection.insert_one(document)
 
     finally:
         # Close the WebDriver
