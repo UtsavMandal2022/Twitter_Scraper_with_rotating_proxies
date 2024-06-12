@@ -33,14 +33,14 @@ def fetch_trending_topics():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument(f'--proxy-server={proxy}')
     driver = webdriver.Chrome(service=service
-                            #   , options=chrome_options
+                            #   , ptions=chrome_options
                               )
     
     
     # Twitter credentials
     username = os.getenv('TWITTER_USERNAME')
     password = os.getenv('TWITTER_PASSWORD')
-    
+
     # print(username, password)
     # Navigate to the Twitter login page
     driver.get('https://twitter.com/login')
