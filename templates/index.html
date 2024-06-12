@@ -6,21 +6,30 @@
     <title>Twitter Trending Topics</title>
     <script>
         async function fetchTrendingTopics() {
-            const response = await fetch('/fetch_topics');
-            const topics = await response.json();
             const topicsList = document.getElementById('topicsList');
-            topicsList.innerHTML = '';
+            topicsList.innerHTML = 'Loading...';
+            const response = await fetch('/fetch_topics');
+            const result = await response.json();
+            // console.log(topics);
+            topicsList.innerHTML = '<h3> These are the most happening topics as on '+result.timestamp+'<br></h3>';
+            topics=result.topics;
             topics.forEach((topic, index) => {
                 const li = document.createElement('li');
                 li.textContent = `Item ${index + 1}: ${topic}`;
                 topicsList.appendChild(li);
             });
+            // add another line to topicsList
+            topicsList.innerHTML += '<h4><br><br>The IP address used for this query was '+result.proxy+'</h4>';
+            const btn=document.getElementById('fetchbutton');
+            // change the text of the button
+            btn.textContent = 'Fetch Trending Topics Again!';
         }
     </script>
 </head>
 <body>
     <h1>Twitter Trending Topics</h1>
-    <button onclick="fetchTrendingTopics()">Fetch Trending Topics</button>
+    <h3>Made by - Utsav Mandal</h3>
+    <button onclick="fetchTrendingTopics()" id="fetchbutton">Fetch Trending Topics</button>
     <ul id="topicsList"></ul>
 </body>
 </html>
